@@ -1,214 +1,797 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Brad Lengel — Portfolio</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brad Lengel | Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --green-dark:   #1E3932;
+      --green-mid:    #2D5016;
+      --green-accent: #00754A;
+      --cream:        #F2F0EB;
+      --warm-white:   #FAF8F4;
+      --gold:         #CBA135;
+      --copper:       #B07C4F;
+      --text-dark:    #1A1A1A;
+      --text-mid:     #3D3D3D;
+      --text-light:   #6B6B6B;
+    }
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-<style>
-:root{
-  --bg:#f6f3ee;
-  --text:#171716;
-  --muted:#6b6761;
-  --accent:#c8522a;
-  --card:#ffffff;
-  --border:#e5e0d8;
-}
+    html { scroll-behavior: smooth; }
 
-*{margin:0;padding:0;box-sizing:border-box;}
+    body {
+      font-family: 'Lato', sans-serif;
+      background-color: var(--warm-white);
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
 
-body{
-  font-family:"DM Sans",sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  line-height:1.6;
-}
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: var(--green-dark);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 64px;
+      box-shadow: 0 2px 20px rgba(0,0,0,.35);
+    }
 
-/* NAV */
-nav{
-  display:flex;
-  justify-content:space-between;
-  padding:22px 60px;
-  border-bottom:1px solid var(--border);
-  position:sticky;
-  top:0;
-  background:var(--bg);
-  z-index:10;
-}
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      letter-spacing: .08em;
+      color: var(--cream);
+      text-decoration: none;
+    }
 
-.logo{
-  font-family:"Playfair Display",serif;
-  font-size:18px;
-}
+    .nav-links {
+      display: flex;
+      gap: 8px;
+      list-style: none;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
 
-nav ul{
-  display:flex;
-  gap:30px;
-  list-style:none;
-  font-size:13px;
-}
+    .nav-links a {
+      color: rgba(242,240,235,.75);
+      text-decoration: none;
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      padding: 6px 10px;
+      border-radius: 4px;
+      transition: color .2s, background .2s;
+    }
 
-nav a{
-  text-decoration:none;
-  color:var(--muted);
-}
-nav a:hover{color:var(--text);}
+    .nav-links a:hover {
+      color: var(--cream);
+      background: rgba(255,255,255,.08);
+    }
 
-/* HERO */
-.hero{
-  display:grid;
-  grid-template-columns:1.2fr 1fr;
-  min-height:85vh;
-  padding:80px 60px;
-  gap:40px;
-}
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      background: var(--green-dark);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 100px 80px 80px;
+      gap: 60px;
+      position: relative;
+      overflow: hidden;
+    }
 
-.hero h1{
-  font-family:"Playfair Display",serif;
-  font-size:64px;
-  line-height:1.05;
-}
+    /* Subtle texture overlay */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 80% at 80% 50%, rgba(0,117,74,.18) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 10% 80%, rgba(203,161,53,.07) 0%, transparent 60%);
+      pointer-events: none;
+    }
 
-.hero h1 span{color:var(--accent);}
+    /* Decorative circle */
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 520px;
+      height: 520px;
+      border-radius: 50%;
+      border: 1px solid rgba(242,240,235,.06);
+      right: -100px;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
 
-.hero p{
-  margin-top:20px;
-  color:var(--muted);
-  max-width:420px;
-}
+    .hero-text { position: relative; z-index: 1; }
 
-.btn{
-  margin-top:30px;
-  display:inline-block;
-  padding:12px 22px;
-  background:var(--text);
-  color:white;
-  text-decoration:none;
-  font-size:13px;
-}
+    .hero-eyebrow {
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 18px;
+      opacity: 0;
+      animation: fadeUp .7s .2s forwards;
+    }
 
-.btn:hover{background:var(--accent);}
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      line-height: 1.05;
+      color: var(--cream);
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeUp .7s .35s forwards;
+    }
 
-/* SECTIONS */
-section{
-  padding:80px 60px;
-}
+    .hero-name em {
+      font-style: italic;
+      color: var(--gold);
+    }
 
-.section-title{
-  font-family:"Playfair Display",serif;
-  font-size:32px;
-  margin-bottom:40px;
-}
+    .hero-contact {
+      font-size: .85rem;
+      color: rgba(242,240,235,.55);
+      margin-bottom: 36px;
+      letter-spacing: .04em;
+      opacity: 0;
+      animation: fadeUp .7s .5s forwards;
+    }
 
-/* PROJECTS */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:20px;
-}
+    .hero-contact a {
+      color: rgba(242,240,235,.75);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(242,240,235,.25);
+      transition: color .2s, border-color .2s;
+    }
+    .hero-contact a:hover { color: var(--gold); border-color: var(--gold); }
 
-.card{
-  background:var(--card);
-  border:1px solid var(--border);
-  padding:20px;
-  transition:.3s;
-}
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 44px;
+      opacity: 0;
+      animation: fadeUp .7s .65s forwards;
+    }
 
-.card:hover{
-  transform:translateY(-6px);
-}
+    .tag {
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 7px 14px;
+      border-radius: 100px;
+      border: 1px solid rgba(242,240,235,.2);
+      color: rgba(242,240,235,.8);
+      transition: border-color .2s, color .2s, background .2s;
+    }
+    .tag:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: rgba(203,161,53,.07);
+    }
 
-.card h3{
-  font-family:"Playfair Display",serif;
-  margin-bottom:10px;
-}
+    .hero-roles {
+      opacity: 0;
+      animation: fadeUp .7s .8s forwards;
+    }
 
-.card p{
-  font-size:13px;
-  color:var(--muted);
-}
+    .roles-label {
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
 
-/* ABOUT */
-.about{
-  background:#171716;
-  color:#fff;
-}
+    .roles-list {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
 
-.about p{color:#cfcac3;max-width:600px;}
+    .roles-list span {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: rgba(242,240,235,.7);
+      line-height: 1.6;
+    }
 
-/* CONTACT */
-.contact{
-  text-align:center;
-}
+    /* Hero right side — decorative card */
+    .hero-visual {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      animation: fadeIn 1s .9s forwards;
+    }
 
-.contact h2{
-  font-family:"Playfair Display",serif;
-  font-size:34px;
-}
+    .hero-card {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(242,240,235,.1);
+      border-radius: 20px;
+      padding: 48px 40px;
+      max-width: 360px;
+      width: 100%;
+      backdrop-filter: blur(6px);
+    }
 
-footer{
-  text-align:center;
-  padding:30px;
-  font-size:12px;
-  color:var(--muted);
-}
-</style>
+    .hero-card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: var(--cream);
+      margin-bottom: 6px;
+    }
+
+    .hero-card-sub {
+      font-size: .78rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 28px;
+    }
+
+    .hero-card-divider {
+      height: 1px;
+      background: rgba(242,240,235,.1);
+      margin-bottom: 24px;
+    }
+
+    .hero-card-stat {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 16px;
+    }
+
+    .stat-label {
+      font-size: .75rem;
+      color: rgba(242,240,235,.5);
+      letter-spacing: .06em;
+    }
+
+    .stat-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--cream);
+    }
+
+    .hero-card-badge {
+      margin-top: 28px;
+      background: linear-gradient(135deg, var(--green-accent), var(--green-mid));
+      border-radius: 10px;
+      padding: 14px 18px;
+      font-size: .75rem;
+      color: rgba(242,240,235,.9);
+      line-height: 1.6;
+      letter-spacing: .03em;
+    }
+
+    /* ── SECTION WRAPPER ── */
+    section { padding: 100px 80px; }
+
+    .section-eyebrow {
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--green-accent);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--green-dark);
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .section-desc {
+      font-size: 1.05rem;
+      color: var(--text-light);
+      max-width: 600px;
+      line-height: 1.8;
+      margin-bottom: 60px;
+    }
+
+    /* ── WORK GRID ── */
+    .work { background: var(--warm-white); }
+
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 28px;
+    }
+
+    .work-card {
+      background: #fff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,.06);
+      transition: transform .3s, box-shadow .3s;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .work-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px rgba(0,0,0,.12);
+    }
+
+    .work-card-img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      display: block;
+      background: var(--cream);
+    }
+
+    .work-card-body {
+      padding: 24px 28px 28px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .work-card-company {
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--green-accent);
+      margin-bottom: 6px;
+    }
+
+    .work-card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      color: var(--green-dark);
+      line-height: 1.35;
+      margin-bottom: 8px;
+    }
+
+    .work-card-desc {
+      font-size: .83rem;
+      color: var(--text-light);
+      line-height: 1.65;
+      flex: 1;
+    }
+
+    .work-card-arrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 18px;
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--green-accent);
+      transition: gap .2s;
+    }
+    .work-card:hover .work-card-arrow { gap: 10px; }
+
+    /* ── ABOUT STRIP ── */
+    .about {
+      background: var(--green-dark);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about .section-title { color: var(--cream); }
+    .about .section-eyebrow { color: var(--gold); }
+
+    .about-body {
+      font-size: 1rem;
+      color: rgba(242,240,235,.7);
+      line-height: 1.9;
+    }
+
+    .about-traits {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .trait {
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(242,240,235,.08);
+      border-radius: 12px;
+      padding: 20px 22px;
+      transition: background .25s, border-color .25s;
+    }
+    .trait:hover {
+      background: rgba(255,255,255,.08);
+      border-color: rgba(203,161,53,.3);
+    }
+
+    .trait-icon { font-size: 1.4rem; margin-bottom: 8px; }
+
+    .trait-label {
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      color: rgba(242,240,235,.9);
+      line-height: 1.4;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #0f1f1b;
+      padding: 60px 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .footer-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: var(--cream);
+    }
+
+    .footer-contact {
+      font-size: .85rem;
+      color: rgba(242,240,235,.5);
+      margin-top: 4px;
+    }
+
+    .footer-contact a {
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    .footer-copy {
+      font-size: .72rem;
+      color: rgba(242,240,235,.25);
+      letter-spacing: .06em;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity .7s, transform .7s;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 100px 28px 60px;
+        gap: 40px;
+        min-height: auto;
+      }
+      .hero-visual { display: none; }
+
+      section { padding: 70px 28px; }
+
+      .about {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        padding: 70px 28px;
+      }
+
+      footer { padding: 40px 28px; }
+    }
+  </style>
 </head>
-
 <body>
 
-<nav>
-  <div class="logo">Brad Lengel</div>
-  <ul>
-    <li><a href="#">Work</a></li>
-    <li><a href="#">About</a></li>
-    <li><a href="#">Contact</a></li>
-  </ul>
-</nav>
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#">Brad Lengel</a>
+    <ul class="nav-links">
+      <li><a href="#work">Work</a></li>
+      <li><a href="https://sites.google.com/view/brad-lengel/capital-one-1" target="_blank">Capital One (1)</a></li>
+      <li><a href="https://sites.google.com/view/brad-lengel/capital-one-2" target="_blank">Capital One (2)</a></li>
+      <li><a href="https://sites.google.com/view/brad-lengel/digital-realty" target="_blank">Digital Realty</a></li>
+      <li><a href="https://sites.google.com/view/brad-lengel/texas-instruments-1" target="_blank">TI (1)</a></li>
+      <li><a href="https://sites.google.com/view/brad-lengel/texas-instruments-2" target="_blank">TI (2)</a></li>
+      <li><a href="https://sites.google.com/view/brad-lengel/barbri-1" target="_blank">BARBRI (1)</a></li>
+      <li><a href="https://sites.google.com/view/brad-lengel/barbri-2" target="_blank">BARBRI (2)</a></li>
+      <li><a href="https://sites.google.com/view/brad-lengel/strategic-leadership" target="_blank">Leadership</a></li>
+      <li><a href="https://sites.google.com/view/brad-lengel/peer-recognition" target="_blank">Recognition</a></li>
+    </ul>
+  </nav>
 
-<div class="hero">
-  <div>
-    <h1>Content & <span>Strategy</span> Designer</h1>
-    <p>I build clean, structured, and story-driven digital experiences that connect brands with people.</p>
-    <a class="btn" href="#">View Work</a>
-  </div>
-</div>
-
-<section>
-  <h2 class="section-title">Selected Work</h2>
-  <div class="grid">
-    <div class="card">
-      <h3>Capital One Project</h3>
-      <p>UX writing and content redesign improving clarity and conversion.</p>
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-text">
+      <p class="hero-eyebrow">Portfolio &nbsp;·&nbsp; Content Strategy &amp; Marketing</p>
+      <h1 class="hero-name">Brad<br><em>Lengel</em></h1>
+      <p class="hero-contact">
+        <a href="mailto:blengel44@gmail.com">blengel44@gmail.com</a>&ensp;·&ensp;Allen, Texas
+      </p>
+      <div class="hero-tags">
+        <span class="tag">📖 Storyteller &amp; Visionary</span>
+        <span class="tag">💻 AI &amp; Martech</span>
+        <span class="tag">🤝 Human-Centered</span>
+        <span class="tag">⚡ UX/CX Innovator</span>
+        <span class="tag">📊 Results-Driven</span>
+        <span class="tag">❣️ Brand Steward</span>
+        <span class="tag">🫶 Teamwork Champion</span>
+      </div>
+      <div class="hero-roles">
+        <p class="roles-label">Open to roles including</p>
+        <div class="roles-list">
+          <span>Content Strategist</span>
+          <span>Content Marketing Manager</span>
+          <span>Marketing Communications Manager</span>
+          <span>Supervisor, Creative Services</span>
+          <span>Brand Strategist</span>
+          <span>Senior Copywriter</span>
+        </div>
+      </div>
     </div>
-    <div class="card">
-      <h3>Brand Strategy</h3>
-      <p>Go-to-market messaging and narrative systems for enterprise brands.</p>
+
+    <div class="hero-visual">
+      <div class="hero-card">
+        <p class="hero-card-title">Work Worth Knowing</p>
+        <p class="hero-card-sub">Selected Portfolio</p>
+        <div class="hero-card-divider"></div>
+        <div class="hero-card-stat">
+          <span class="stat-label">Clients &amp; Brands</span>
+          <span class="stat-value">Capital One · Digital Realty · TI · BARBRI</span>
+        </div>
+        <div class="hero-card-stat">
+          <span class="stat-label">Specialties</span>
+          <span class="stat-value">Strategy · Copy · UX · Brand</span>
+        </div>
+        <div class="hero-card-stat">
+          <span class="stat-label">Location</span>
+          <span class="stat-value">Allen, Texas</span>
+        </div>
+        <div class="hero-card-badge">
+          Blending storytelling with data-driven strategy to create content that converts, connects, and endures.
+        </div>
+      </div>
     </div>
-    <div class="card">
-      <h3>Content Systems</h3>
-      <p>Scalable content frameworks for digital platforms and campaigns.</p>
+  </header>
+
+  <!-- WORK -->
+  <section class="work" id="work">
+    <p class="section-eyebrow reveal">Selected Work</p>
+    <h2 class="section-title reveal">Campaigns, Content &amp;<br>Strategic Initiatives</h2>
+    <p class="section-desc reveal">
+      A curated look at brand-building, campaign strategy, UX writing, and content leadership across Fortune 500 companies and beyond.
+    </p>
+
+    <div class="work-grid">
+
+      <a class="work-card reveal" href="https://sites.google.com/view/brad-lengel/capital-one-1" target="_blank">
+        <img class="work-card-img"
+          src="https://lh3.googleusercontent.com/sitesv/APaQ0SS5D5ciPFnf0iQWd3y9QYrsL8Y4ZiRYZKwABWyzkCM5DHVa9SgdWqVHCwKnA48ZiYWDAQVh5VSI2sOKMP3lnKZh5dUZJuSv9KWvYVqchh1AonPs83pCrhbfEZYAZ3SGJjZGE4KqquT1zoObLQsBI-8UWW-pi8p5CAEE_UhcSLxHbHppBVNKJzWStIvL8ln_O3ZtETcLbLtOxXkPP_yN-D4P1GZzVscF2Dy4=w1280"
+          alt="Capital One Auto Finance — Refinance Home Page"
+          loading="lazy" />
+        <div class="work-card-body">
+          <p class="work-card-company">Capital One Auto</p>
+          <h3 class="work-card-title">Refinance Home Page</h3>
+          <p class="work-card-desc">Information architecture &amp; design revamp for the auto refinance experience.</p>
+          <span class="work-card-arrow">View project &rarr;</span>
+        </div>
+      </a>
+
+      <a class="work-card reveal" href="https://sites.google.com/view/brad-lengel/capital-one-2" target="_blank">
+        <img class="work-card-img"
+          src="https://lh3.googleusercontent.com/sitesv/APaQ0SRR4T626yP_lfwrixsft_k3GjfYavBgrA8u2K734_7K8nDaP69B8vUEPlzg-QDuow5WTwdczcFnb4YEobWQYikwI7XqSEHRjj8-RN2WD_puC3eh8w5Wt5yzfsRaeFbDb9Nmu1YwgI0XrkzABTkKZZjgcRampU3llDhAemCYKf2Dkqi3LWswqp40PMqaULHjBe8se5gzNn0zq0ufyzZ166zILyM2r3Rl2By0JvQ=w1280"
+          alt="Capital One Auto — Distinguished Work"
+          loading="lazy" />
+        <div class="work-card-body">
+          <p class="work-card-company">Capital One Auto</p>
+          <h3 class="work-card-title">Distinguished Work</h3>
+          <p class="work-card-desc">Partnering on high-impact, ROI-driven initiatives that moved the needle for the brand.</p>
+          <span class="work-card-arrow">View project &rarr;</span>
+        </div>
+      </a>
+
+      <a class="work-card reveal" href="https://sites.google.com/view/brad-lengel/digital-realty" target="_blank">
+        <img class="work-card-img"
+          src="https://lh3.googleusercontent.com/sitesv/APaQ0SQYAh8r7vwdJltYJAnJl3fkCJUkNPmBUl5yio-JMhWfb1dLdrt4JshFkqffjBSyVxQhuUJ66BsIcI-MzOYq8nEmK_If37f4wOWr-CCjjwBc1zZCGpgBANh-tI7Fjaw4eYQc-NxZHcXGZypnx5GvbcK5OmTFodbOJmC6OMTsDEmgH3m8QVyI_d22zGQEDHhHAC8O-N1QhbF8F1JQSxLvGuu4Ox9iZBdJgAQY9o4=w1280"
+          alt="Digital Realty — Data Gravity Newsletter Microsite"
+          loading="lazy" />
+        <div class="work-card-body">
+          <p class="work-card-company">Digital Realty</p>
+          <h3 class="work-card-title">Data Gravity Newsletter Microsite</h3>
+          <p class="work-card-desc">GTM campaign strategy powering a thought-leadership microsite for the data center leader.</p>
+          <span class="work-card-arrow">View project &rarr;</span>
+        </div>
+      </a>
+
+      <a class="work-card reveal" href="https://sites.google.com/view/brad-lengel/texas-instruments-1" target="_blank">
+        <img class="work-card-img"
+          src="https://lh3.googleusercontent.com/sitesv/APaQ0SQLygV6WQFQtBp6Isp_HsTElXY1bKzrMvrOB375v8vcxRx56d-BuyChsbABvBJGL8WedR0qfVeXBHukKgh0b5Bo3HzcPpd9mWzGf5cw_6cmOLo0ek3a3hZYOUpc4l-Ks3nrYIBX78kyIRbuJfKmCOWLsX6akS2L1IKnFPF1ChxQYgv6UO35aOTNDuFxB7sd8KMQhA40mq8uSNAa28I7OypfscjG3d3ggxyI=w1280"
+          alt="Texas Instruments — TI-Nspire Product Launch Microsite"
+          loading="lazy" />
+        <div class="work-card-body">
+          <p class="work-card-company">Texas Instruments</p>
+          <h3 class="work-card-title">New TI-Nspire™ Technology</h3>
+          <p class="work-card-desc">Product launch microsite introducing the new TI-Nspire™ technology line to educators and students.</p>
+          <span class="work-card-arrow">View project &rarr;</span>
+        </div>
+      </a>
+
+      <a class="work-card reveal" href="https://sites.google.com/view/brad-lengel/texas-instruments-2" target="_blank">
+        <img class="work-card-img"
+          src="https://lh3.googleusercontent.com/sitesv/APaQ0SS3xeHDSiaFhGpjfj1fE89VnSS28Yu4nHBOOuaUjh18VxoJDdbruhT7Sg5Aw36OaiAA_Rd6_Ro4rlBicTwdTyiLXCjS9VEIM9gNRM5eayAZS7mxZGzUSIQkR2G82Vp4G1FgBYmWj-h3IQQxFkDjz9gDAopA7pNMJl94fQgx8VCmA_2cL55v4tDyW9A9L37oHk48orogujhXpGvRMIAOg5qHdonGDHntT=w1280"
+          alt="Texas Instruments — Competitive Positioning"
+          loading="lazy" />
+        <div class="work-card-body">
+          <p class="work-card-company">Texas Instruments</p>
+          <h3 class="work-card-title">Competitive Positioning &amp; Communications</h3>
+          <p class="work-card-desc">Strategic messaging and communications framework for the TI-Nspire™ product family.</p>
+          <span class="work-card-arrow">View project &rarr;</span>
+        </div>
+      </a>
+
+      <a class="work-card reveal" href="https://sites.google.com/view/brad-lengel/barbri-1" target="_blank">
+        <img class="work-card-img"
+          src="https://lh3.googleusercontent.com/sitesv/APaQ0SQOjX1lFcuuMu0f1MlqMDQIdkyxn0-hrM7ioaK0n778Ngx2pgV2zftUPA-CEvj5_2xGvtkvM4p6LxGssTSGHHuil_n8zsv0rQRGoHwb1qUe9rehqvKvDA5S-s9hv-o4kDPZBEH6y1qlL-_HezgO4GfXMovx8x4Wyisw_3M-kyJO-VIwPeSyaBU1=w1280"
+          alt="BARBRI — Integrated Communications Campaign"
+          loading="lazy" />
+        <div class="work-card-body">
+          <p class="work-card-company">BARBRI</p>
+          <h3 class="work-card-title">Integrated Communications Campaign</h3>
+          <p class="work-card-desc">Campaign strategy, content execution, and analytics driving enrollment for the legal education leader.</p>
+          <span class="work-card-arrow">View project &rarr;</span>
+        </div>
+      </a>
+
+      <a class="work-card reveal" href="https://sites.google.com/view/brad-lengel/barbri-2" target="_blank">
+        <img class="work-card-img"
+          src="https://lh3.googleusercontent.com/sitesv/APaQ0SSkIYRE1yG4KQoRs05vvHwwFvSunNGgatvZsZXZUixUj18VxoJDdbruhT7Sg5Aw36OaiAA_Rd6_Ro4rlBicTwdTyiLXCjS9VEIM9gNRM5eayAZS7mxZGzUSIQkR2G82Vp4G1FgBYmWj-h3IQQxFkDjz9gDAopA7pNMJl94fQgx8VCmA_2cL55v4tDyW9A9L37oHk48orogujhXpGvRMIAOg5qHdonGDHntT=w1280"
+          alt="BARBRI — YouTube Channel Content Development"
+          loading="lazy" />
+        <div class="work-card-body">
+          <p class="work-card-company">BARBRI</p>
+          <h3 class="work-card-title">YouTube Channel</h3>
+          <p class="work-card-desc">Content development and SEO optimization for BARBRI's YouTube channel, building organic reach.</p>
+          <span class="work-card-arrow">View project &rarr;</span>
+        </div>
+      </a>
+
+      <a class="work-card reveal" href="https://sites.google.com/view/brad-lengel/strategic-leadership" target="_blank">
+        <img class="work-card-img"
+          src="https://lh3.googleusercontent.com/sitesv/APaQ0SR9iGDWfeGT9wURSmHRDao6X37iOBQYjjKVdSWSOtMumYmqz9XOFy9EfBmQZcBg8HeqBGAmynArVqnp49Sx335KQUGgSwpwgDDjsGftrY8Gp6HYoTNtyZq8J3u87Nyl-jjceL0oHwTT-75jJH0fMvswvY0T_Myiw0VwZ1o8tniIhzA5rfBo4HZlF1EsG9d-TcTKvmxRGGiaM-Of63XO547eHJ7fC2a7Tm=w1280"
+          alt="Strategic Leadership — Operations and Intelligence"
+          loading="lazy" />
+        <div class="work-card-body">
+          <p class="work-card-company">Strategic Leadership</p>
+          <h3 class="work-card-title">Operations &amp; Intelligence</h3>
+          <p class="work-card-desc">Process improvement, research, AI integration, and actionable recommendations for modern marketing teams.</p>
+          <span class="work-card-arrow">View project &rarr;</span>
+        </div>
+      </a>
+
+      <a class="work-card reveal" href="https://sites.google.com/view/brad-lengel/peer-recognition" target="_blank">
+        <div class="work-card-body" style="justify-content:center; padding: 48px 28px;">
+          <div style="font-size:2.5rem; margin-bottom:16px;">🏅</div>
+          <p class="work-card-company">Peer Recognition</p>
+          <h3 class="work-card-title">Peer &amp; Colleague Recognition</h3>
+          <p class="work-card-desc">Testimonials and recognition from teammates and leaders on collaboration, creativity, and impact.</p>
+          <span class="work-card-arrow">View recognition &rarr;</span>
+        </div>
+      </a>
+
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="about">
-  <h2 class="section-title">About</h2>
-  <p>
-    I focus on bridging storytelling and strategy to create meaningful digital experiences.
-  </p>
-</section>
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div>
+      <p class="section-eyebrow reveal">About Brad</p>
+      <h2 class="section-title reveal">Where Story Meets Strategy</h2>
+      <p class="about-body reveal">
+        I'm a content strategist and marketing communications leader who believes great work lives at the intersection of human insight and business clarity. With deep roots in brand storytelling, UX writing, and AI-powered marketing, I help organizations connect meaningfully with their audiences — and measure what matters.
+      </p>
+      <br/>
+      <p class="about-body reveal">
+        Based in Allen, Texas. Open to new opportunities. Let's talk.
+        <br/><br/>
+        <a href="mailto:blengel44@gmail.com" style="color: var(--gold); font-weight:700; letter-spacing:.05em;">blengel44@gmail.com</a>
+      </p>
+    </div>
+    <div class="about-traits reveal">
+      <div class="trait">
+        <div class="trait-icon">📖</div>
+        <div class="trait-label">Storyteller &amp; Visionary</div>
+      </div>
+      <div class="trait">
+        <div class="trait-icon">💻</div>
+        <div class="trait-label">AI &amp; Martech Enthusiast</div>
+      </div>
+      <div class="trait">
+        <div class="trait-icon">🤝</div>
+        <div class="trait-label">Human-Centered Communicator</div>
+      </div>
+      <div class="trait">
+        <div class="trait-icon">⚡</div>
+        <div class="trait-label">UX / CX Innovator</div>
+      </div>
+      <div class="trait">
+        <div class="trait-icon">📊</div>
+        <div class="trait-label">Results-Driven &amp; Business-Minded</div>
+      </div>
+      <div class="trait">
+        <div class="trait-icon">❣️</div>
+        <div class="trait-label">Brand Steward</div>
+      </div>
+      <div class="trait">
+        <div class="trait-icon">🫶</div>
+        <div class="trait-label">Teamwork Advocate &amp; Champion</div>
+      </div>
+    </div>
+  </section>
 
-<section class="contact">
-  <h2>Let’s build something</h2>
-  <p>Email me at your@email.com</p>
-</section>
+  <!-- FOOTER -->
+  <footer>
+    <div>
+      <div class="footer-name">Brad Lengel</div>
+      <div class="footer-contact">
+        <a href="mailto:blengel44@gmail.com">blengel44@gmail.com</a> &nbsp;·&nbsp; Allen, Texas
+      </div>
+    </div>
+    <div class="footer-copy">© 2025 Brad Lengel. All rights reserved.</div>
+  </footer>
 
-<footer>
-  © 2026 Brad Lengel
-</footer>
-
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          // stagger siblings in the same grid
+          const delay = Array.from(e.target.parentElement.children).indexOf(e.target) * 80;
+          setTimeout(() => e.target.classList.add('visible'), Math.min(delay, 400));
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => io.observe(el));
+  </script>
 </body>
 </html>
