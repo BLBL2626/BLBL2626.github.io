@@ -1,796 +1,842 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Brad Lengel | Portfolio</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --green-dark:   #1E3932;
-      --green-mid:    #2D5016;
-      --green-accent: #00754A;
-      --cream:        #F2F0EB;
-      --warm-white:   #FAF8F4;
-      --gold:         #CBA135;
-      --copper:       #B07C4F;
-      --text-dark:    #1A1A1A;
-      --text-mid:     #3D3D3D;
-      --text-light:   #6B6B6B;
-    }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Lato', sans-serif;
-      background-color: var(--warm-white);
-      color: var(--text-dark);
-      overflow-x: hidden;
-    }
-
-    /* ── NAV ── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      background: var(--green-dark);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 40px;
-      height: 64px;
-      box-shadow: 0 2px 20px rgba(0,0,0,.35);
-    }
-
-    .nav-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.1rem;
-      letter-spacing: .08em;
-      color: var(--cream);
-      text-decoration: none;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 8px;
-      list-style: none;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-
-    .nav-links a {
-      color: rgba(242,240,235,.75);
-      text-decoration: none;
-      font-size: .75rem;
-      font-weight: 700;
-      letter-spacing: .07em;
-      text-transform: uppercase;
-      padding: 6px 10px;
-      border-radius: 4px;
-      transition: color .2s, background .2s;
-    }
-
-    .nav-links a:hover {
-      color: var(--cream);
-      background: rgba(255,255,255,.08);
-    }
-
-    /* ── HERO ── */
-    .hero {
-      min-height: 100vh;
-      background: var(--green-dark);
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
-      padding: 100px 80px 80px;
-      gap: 60px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* Subtle texture overlay */
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 60% 80% at 80% 50%, rgba(0,117,74,.18) 0%, transparent 70%),
-        radial-gradient(ellipse 40% 60% at 10% 80%, rgba(203,161,53,.07) 0%, transparent 60%);
-      pointer-events: none;
-    }
-
-    /* Decorative circle */
-    .hero::after {
-      content: '';
-      position: absolute;
-      width: 520px;
-      height: 520px;
-      border-radius: 50%;
-      border: 1px solid rgba(242,240,235,.06);
-      right: -100px;
-      top: 50%;
-      transform: translateY(-50%);
-      pointer-events: none;
-    }
-
-    .hero-text { position: relative; z-index: 1; }
-
-    .hero-eyebrow {
-      font-size: .75rem;
-      font-weight: 700;
-      letter-spacing: .2em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 18px;
-      opacity: 0;
-      animation: fadeUp .7s .2s forwards;
-    }
-
-    .hero-name {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(3rem, 6vw, 5.5rem);
-      line-height: 1.05;
-      color: var(--cream);
-      margin-bottom: 28px;
-      opacity: 0;
-      animation: fadeUp .7s .35s forwards;
-    }
-
-    .hero-name em {
-      font-style: italic;
-      color: var(--gold);
-    }
-
-    .hero-contact {
-      font-size: .85rem;
-      color: rgba(242,240,235,.55);
-      margin-bottom: 36px;
-      letter-spacing: .04em;
-      opacity: 0;
-      animation: fadeUp .7s .5s forwards;
-    }
-
-    .hero-contact a {
-      color: rgba(242,240,235,.75);
-      text-decoration: none;
-      border-bottom: 1px solid rgba(242,240,235,.25);
-      transition: color .2s, border-color .2s;
-    }
-    .hero-contact a:hover { color: var(--gold); border-color: var(--gold); }
-
-    .hero-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 44px;
-      opacity: 0;
-      animation: fadeUp .7s .65s forwards;
-    }
-
-    .tag {
-      font-size: .72rem;
-      font-weight: 700;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      padding: 7px 14px;
-      border-radius: 100px;
-      border: 1px solid rgba(242,240,235,.2);
-      color: rgba(242,240,235,.8);
-      transition: border-color .2s, color .2s, background .2s;
-    }
-    .tag:hover {
-      border-color: var(--gold);
-      color: var(--gold);
-      background: rgba(203,161,53,.07);
-    }
-
-    .hero-roles {
-      opacity: 0;
-      animation: fadeUp .7s .8s forwards;
-    }
-
-    .roles-label {
-      font-size: .68rem;
-      font-weight: 700;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 12px;
-    }
-
-    .roles-list {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .roles-list span {
-      font-family: 'Playfair Display', serif;
-      font-size: 1rem;
-      color: rgba(242,240,235,.7);
-      line-height: 1.6;
-    }
-
-    /* Hero right side — decorative card */
-    .hero-visual {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      opacity: 0;
-      animation: fadeIn 1s .9s forwards;
-    }
-
-    .hero-card {
-      background: rgba(255,255,255,.04);
-      border: 1px solid rgba(242,240,235,.1);
-      border-radius: 20px;
-      padding: 48px 40px;
-      max-width: 360px;
-      width: 100%;
-      backdrop-filter: blur(6px);
-    }
-
-    .hero-card-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.4rem;
-      color: var(--cream);
-      margin-bottom: 6px;
-    }
-
-    .hero-card-sub {
-      font-size: .78rem;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 28px;
-    }
-
-    .hero-card-divider {
-      height: 1px;
-      background: rgba(242,240,235,.1);
-      margin-bottom: 24px;
-    }
-
-    .hero-card-stat {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: 16px;
-    }
-
-    .stat-label {
-      font-size: .75rem;
-      color: rgba(242,240,235,.5);
-      letter-spacing: .06em;
-    }
-
-    .stat-value {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.1rem;
-      color: var(--cream);
-    }
-
-    .hero-card-badge {
-      margin-top: 28px;
-      background: linear-gradient(135deg, var(--green-accent), var(--green-mid));
-      border-radius: 10px;
-      padding: 14px 18px;
-      font-size: .75rem;
-      color: rgba(242,240,235,.9);
-      line-height: 1.6;
-      letter-spacing: .03em;
-    }
-
-    /* ── SECTION WRAPPER ── */
-    section { padding: 100px 80px; }
-
-    .section-eyebrow {
-      font-size: .72rem;
-      font-weight: 700;
-      letter-spacing: .2em;
-      text-transform: uppercase;
-      color: var(--green-accent);
-      margin-bottom: 12px;
-    }
-
-    .section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 4vw, 3rem);
-      color: var(--green-dark);
-      margin-bottom: 20px;
-      line-height: 1.2;
-    }
-
-    .section-desc {
-      font-size: 1.05rem;
-      color: var(--text-light);
-      max-width: 600px;
-      line-height: 1.8;
-      margin-bottom: 60px;
-    }
-
-    /* ── WORK GRID ── */
-    .work { background: var(--warm-white); }
-
-    .work-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-      gap: 28px;
-    }
-
-    .work-card {
-      background: #fff;
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 2px 12px rgba(0,0,0,.06);
-      transition: transform .3s, box-shadow .3s;
-      text-decoration: none;
-      color: inherit;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .work-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 16px 40px rgba(0,0,0,.12);
-    }
-
-    .work-card-img {
-      width: 100%;
-      aspect-ratio: 16/9;
-      object-fit: cover;
-      display: block;
-      background: var(--cream);
-    }
-
-    .work-card-body {
-      padding: 24px 28px 28px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .work-card-company {
-      font-size: .68rem;
-      font-weight: 700;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      color: var(--green-accent);
-      margin-bottom: 6px;
-    }
-
-    .work-card-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.15rem;
-      color: var(--green-dark);
-      line-height: 1.35;
-      margin-bottom: 8px;
-    }
-
-    .work-card-desc {
-      font-size: .83rem;
-      color: var(--text-light);
-      line-height: 1.65;
-      flex: 1;
-    }
-
-    .work-card-arrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      margin-top: 18px;
-      font-size: .78rem;
-      font-weight: 700;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      color: var(--green-accent);
-      transition: gap .2s;
-    }
-    .work-card:hover .work-card-arrow { gap: 10px; }
-
-    /* ── ABOUT STRIP ── */
-    .about {
-      background: var(--green-dark);
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-    }
-
-    .about .section-title { color: var(--cream); }
-    .about .section-eyebrow { color: var(--gold); }
-
-    .about-body {
-      font-size: 1rem;
-      color: rgba(242,240,235,.7);
-      line-height: 1.9;
-    }
-
-    .about-traits {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-
-    .trait {
-      background: rgba(255,255,255,.05);
-      border: 1px solid rgba(242,240,235,.08);
-      border-radius: 12px;
-      padding: 20px 22px;
-      transition: background .25s, border-color .25s;
-    }
-    .trait:hover {
-      background: rgba(255,255,255,.08);
-      border-color: rgba(203,161,53,.3);
-    }
-
-    .trait-icon { font-size: 1.4rem; margin-bottom: 8px; }
-
-    .trait-label {
-      font-size: .8rem;
-      font-weight: 700;
-      letter-spacing: .06em;
-      color: rgba(242,240,235,.9);
-      line-height: 1.4;
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      background: #0f1f1b;
-      padding: 60px 80px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 30px;
-      flex-wrap: wrap;
-    }
-
-    .footer-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.5rem;
-      color: var(--cream);
-    }
-
-    .footer-contact {
-      font-size: .85rem;
-      color: rgba(242,240,235,.5);
-      margin-top: 4px;
-    }
-
-    .footer-contact a {
-      color: var(--gold);
-      text-decoration: none;
-    }
-
-    .footer-copy {
-      font-size: .72rem;
-      color: rgba(242,240,235,.25);
-      letter-spacing: .06em;
-    }
-
-    /* ── ANIMATIONS ── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(22px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to   { opacity: 1; }
-    }
-
-    /* Scroll reveal */
-    .reveal {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity .7s, transform .7s;
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 900px) {
-      nav { padding: 0 20px; }
-      .nav-links { display: none; }
-
-      .hero {
-        grid-template-columns: 1fr;
-        padding: 100px 28px 60px;
-        gap: 40px;
-        min-height: auto;
-      }
-      .hero-visual { display: none; }
-
-      section { padding: 70px 28px; }
-
-      .about {
-        grid-template-columns: 1fr;
-        gap: 40px;
-        padding: 70px 28px;
-      }
-
-      footer { padding: 40px 28px; }
-    }
-  </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Brad Lengel | Content Strategist & Storyteller</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet"/>
+
+<style>
+/* ═══════════════════════════════════════════
+   2025 "NATURALLY REFINED" PALETTE — HGTV / SW
+   ═══════════════════════════════════════════ */
+:root {
+  --quietude:    #7DA5A0;
+  --rocky-river: #4E7B78;
+  --delft:       #5B7FA6;
+  --nutshell:    #6B4F5A;
+  --spiced-cider:#C17A45;
+  --convivial:   #D9A84E;
+  --nomadic:     #C4A882;
+  --stucco:      #E8DDD0;
+  --snowbound:   #F5F1EC;
+  --ink:         #1C1C1E;
+  --ink-mid:     #3A3535;
+  --ink-soft:    #6B6360;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--snowbound);
+  color: var(--ink);
+  overflow-x: hidden;
+}
+
+/* subtle grain */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: .025;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23g)'/%3E%3C/svg%3E");
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+  height: 60px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 48px;
+  background: rgba(245,241,236,.93);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(125,165,160,.18);
+}
+.nav-logo {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.1rem; letter-spacing: .02em;
+  color: var(--rocky-river); text-decoration: none;
+}
+.nav-links { display: flex; gap: 2px; list-style: none; flex-wrap: wrap; justify-content: flex-end; }
+.nav-links a {
+  font-size: .69rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--ink-soft); text-decoration: none;
+  padding: 5px 9px; border-radius: 6px;
+  transition: color .2s, background .2s;
+}
+.nav-links a:hover { color: var(--rocky-river); background: rgba(125,165,160,.12); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  background: var(--quietude);
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  align-items: center;
+  padding: 80px 0 0;
+  position: relative;
+  overflow: hidden;
+}
+.hero-wave {
+  position: absolute; bottom: -1px; left: 0; right: 0;
+  line-height: 0;
+}
+.hero-wave svg { width: 100%; height: 90px; display: block; }
+
+/* ambient blobs */
+.hero::before {
+  content: '';
+  position: absolute; top: -120px; right: -80px;
+  width: 550px; height: 550px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-left {
+  padding: 80px 60px 140px 80px;
+  position: relative; z-index: 2;
+}
+
+.hero-kicker {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'Caveat', cursive; font-size: 1.15rem; font-weight: 700;
+  color: var(--snowbound);
+  background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.26);
+  border-radius: 100px; padding: 6px 18px 6px 12px;
+  margin-bottom: 26px;
+  opacity: 0; animation: up .6s .1s forwards;
+}
+.hero-name {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(3.6rem, 7.5vw, 6.8rem);
+  line-height: 1.0; color: var(--snowbound);
+  margin-bottom: 8px;
+  opacity: 0; animation: up .7s .22s forwards;
+}
+.hero-name em { font-style: italic; color: var(--convivial); display: block; }
+.hero-tagline {
+  font-family: 'Caveat', cursive; font-size: 1.5rem;
+  color: rgba(245,241,236,.78); margin-bottom: 32px;
+  opacity: 0; animation: up .7s .34s forwards;
+}
+.hero-meta {
+  font-size: .8rem; letter-spacing: .08em; text-transform: uppercase;
+  color: rgba(245,241,236,.6); margin-bottom: 38px;
+  opacity: 0; animation: up .7s .46s forwards;
+}
+.hero-meta a { color: var(--convivial); text-decoration: none; border-bottom: 1px dotted var(--convivial); }
+
+.pills {
+  display: flex; flex-wrap: wrap; gap: 9px; margin-bottom: 44px;
+  opacity: 0; animation: up .7s .58s forwards;
+}
+.pill {
+  font-size: .74rem; font-weight: 500;
+  color: var(--snowbound);
+  background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.22);
+  border-radius: 100px; padding: 7px 16px;
+  transition: background .2s, transform .18s;
+  cursor: default;
+}
+.pill:hover { background: rgba(255,255,255,.24); transform: translateY(-2px); }
+
+.hero-cta {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--nutshell); color: var(--snowbound);
+  font-size: .8rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  text-decoration: none; padding: 14px 28px; border-radius: 100px;
+  transition: background .25s, transform .2s, box-shadow .2s;
+  opacity: 0; animation: up .7s .7s forwards;
+}
+.hero-cta:hover { background: var(--ink); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,.22); }
+
+/* hero illustration panel */
+.hero-right {
+  position: relative; z-index: 2;
+  height: 100%; min-height: 480px;
+  display: flex; align-items: flex-end; justify-content: center;
+  padding-bottom: 100px;
+  opacity: 0; animation: fadeIn 1.1s .5s forwards;
+}
+
+/* ── ROLES RIBBON ── */
+.ribbon {
+  background: var(--nutshell);
+  padding: 18px 0; overflow: hidden; white-space: nowrap;
+  position: relative;
+}
+.ribbon::before, .ribbon::after {
+  content: ''; position: absolute; top: 0; bottom: 0; width: 80px; z-index: 2;
+}
+.ribbon::before { left: 0; background: linear-gradient(to right, var(--nutshell), transparent); }
+.ribbon::after  { right: 0; background: linear-gradient(to left, var(--nutshell), transparent); }
+.ribbon-track {
+  display: inline-flex; gap: 0;
+  animation: ticker 28s linear infinite;
+}
+.ribbon-item {
+  display: inline-flex; align-items: center; gap: 16px;
+  padding: 0 28px;
+  font-family: 'DM Serif Display', serif; font-size: .95rem;
+  color: var(--snowbound); letter-spacing: .03em;
+}
+.rdot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--convivial); flex-shrink: 0;
+}
+
+/* ── ABOUT ── */
+.about {
+  background: var(--snowbound);
+  padding: 110px 80px;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px; align-items: center;
+}
+.about-illus { display: flex; justify-content: center; }
+.about-illus svg { width: 100%; max-width: 430px; filter: drop-shadow(0 18px 36px rgba(78,123,120,.16)); }
+
+.eyebrow {
+  font-family: 'Caveat', cursive; font-size: 1.2rem;
+  color: var(--spiced-cider); margin-bottom: 10px;
+}
+.about-text h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2rem, 3.5vw, 2.8rem); line-height: 1.2;
+  color: var(--ink); margin-bottom: 20px;
+}
+.about-text h2 em { font-style: italic; color: var(--rocky-river); }
+.about-text p {
+  font-size: 1.02rem; line-height: 1.85; color: var(--ink-soft); margin-bottom: 16px;
+}
+.about-text p strong { color: var(--ink); font-weight: 700; }
+
+/* ── WORK ── */
+.work { background: var(--stucco); padding: 110px 80px; }
+
+.sec-head {
+  margin-bottom: 56px;
+}
+.sec-head h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2rem, 3.5vw, 2.8rem); line-height: 1.2; color: var(--ink);
+}
+.sec-head h2 em { font-style: italic; color: var(--quietude); }
+
+/* editorial asymmetric grid */
+.wgrid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 20px;
+}
+.wc {
+  background: var(--snowbound); border-radius: 18px; overflow: hidden;
+  text-decoration: none; color: inherit;
+  display: flex; flex-direction: column;
+  box-shadow: 0 2px 14px rgba(0,0,0,.07);
+  transition: transform .32s cubic-bezier(.34,1.56,.64,1), box-shadow .3s;
+  position: relative;
+}
+.wc:hover { transform: translateY(-8px) rotate(-.3deg); box-shadow: 0 22px 52px rgba(0,0,0,.13); }
+.wc:nth-child(1) { grid-column: span 7; }
+.wc:nth-child(2) { grid-column: span 5; }
+.wc:nth-child(3) { grid-column: span 4; }
+.wc:nth-child(4) { grid-column: span 4; }
+.wc:nth-child(5) { grid-column: span 4; }
+.wc:nth-child(6) { grid-column: span 5; }
+.wc:nth-child(7) { grid-column: span 4; }
+.wc:nth-child(8) { grid-column: span 5; }
+.wc:nth-child(9) { grid-column: span 7; }
+
+.wc-img { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; background: var(--stucco); }
+.wc:nth-child(1) .wc-img { aspect-ratio: 21/9; }
+
+.wc-body { padding: 22px 26px 26px; flex: 1; display: flex; flex-direction: column; }
+.wc-co {
+  font-size: .66rem; font-weight: 700; letter-spacing: .17em; text-transform: uppercase;
+  color: var(--quietude); margin-bottom: 5px;
+}
+.wc-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.08rem; line-height: 1.3; color: var(--ink); margin-bottom: 7px;
+}
+.wc-desc { font-size: .81rem; color: var(--ink-soft); line-height: 1.65; flex: 1; }
+.wc-arrow {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-top: 15px; font-size: .72rem; font-weight: 700; letter-spacing: .09em;
+  text-transform: uppercase; color: var(--spiced-cider);
+  transition: gap .2s, color .2s;
+}
+.wc:hover .wc-arrow { gap: 10px; color: var(--nutshell); }
+
+.wc-badge {
+  position: absolute; top: 14px; left: 14px;
+  background: var(--nutshell); color: var(--snowbound);
+  font-size: .58rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 100px;
+}
+
+/* recognition card */
+.wc-reco {
+  background: linear-gradient(135deg, var(--quietude) 0%, var(--delft) 100%);
+  min-height: 220px;
+}
+.wc-reco .wc-co   { color: rgba(245,241,236,.7); }
+.wc-reco .wc-title { color: var(--snowbound); font-size: 1.2rem; }
+.wc-reco .wc-desc  { color: rgba(245,241,236,.72); }
+.wc-reco .wc-arrow { color: var(--convivial); }
+.wc-reco:hover .wc-arrow { color: var(--snowbound); }
+
+/* ── SKILLS ── */
+.skills {
+  background: var(--snowbound); padding: 110px 80px;
+}
+.skills h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2rem, 3vw, 2.6rem); text-align: center; color: var(--ink); margin-bottom: 56px;
+}
+.skills h2 em { font-style: italic; color: var(--spiced-cider); }
+.sgrid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 16px;
+}
+.sc {
+  background: var(--snowbound);
+  border: 1.5px solid rgba(125,165,160,.2);
+  border-radius: 16px; padding: 28px 22px; text-align: center;
+  transition: border-color .25s, background .25s, transform .25s;
+}
+.sc:hover { border-color: var(--quietude); background: rgba(125,165,160,.07); transform: translateY(-4px); }
+.sc-icon { font-size: 2.1rem; margin-bottom: 12px; display: block; }
+.sc-name { font-family: 'DM Serif Display', serif; font-size: 1rem; color: var(--ink); margin-bottom: 6px; }
+.sc-desc { font-size: .78rem; color: var(--ink-soft); line-height: 1.6; }
+
+/* ── CONTACT ── */
+.contact {
+  background: var(--ink); padding: 110px 80px 60px; position: relative; overflow: hidden;
+}
+.contact-blob {
+  position: absolute; top: -120px; right: -120px; width: 520px; opacity: .06; pointer-events: none;
+}
+.contact-inner {
+  position: relative; z-index: 2;
+  display: grid; grid-template-columns: 1fr auto; gap: 60px; align-items: start;
+}
+.contact .eyebrow { color: var(--convivial); }
+.contact h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2.2rem, 4vw, 3.5rem); line-height: 1.15;
+  color: var(--snowbound); margin-bottom: 22px;
+}
+.contact h2 em { font-style: italic; color: var(--quietude); }
+.contact p { font-size: 1.02rem; color: rgba(245,241,236,.58); line-height: 1.8; max-width: 520px; margin-bottom: 34px; }
+.contact-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--quietude); color: var(--snowbound);
+  font-size: .82rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  text-decoration: none; padding: 15px 28px; border-radius: 100px;
+  transition: background .25s, transform .2s;
+}
+.contact-btn:hover { background: var(--rocky-river); transform: translateY(-2px); }
+.contact-nav { display: flex; flex-direction: column; gap: 8px; }
+.contact-nav-head {
+  font-size: .67rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase;
+  color: rgba(245,241,236,.28); margin-bottom: 8px;
+}
+.contact-nav a {
+  font-size: .87rem; color: rgba(245,241,236,.52); text-decoration: none;
+  transition: color .2s; padding: 2px 0; border-bottom: 1px solid transparent;
+}
+.contact-nav a:hover { color: var(--convivial); border-bottom-color: rgba(217,168,78,.3); }
+.contact-foot {
+  position: relative; z-index: 2; margin-top: 80px; padding-top: 24px;
+  border-top: 1px solid rgba(245,241,236,.08);
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+}
+.contact-foot-name { font-family: 'DM Serif Display', serif; font-size: .95rem; color: rgba(245,241,236,.32); }
+.contact-foot-copy { font-size: .7rem; color: rgba(245,241,236,.18); letter-spacing: .06em; }
+
+/* ── ANIMATIONS ── */
+@keyframes up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.sr { opacity: 0; transform: translateY(30px); transition: opacity .7s, transform .7s; }
+.sr.vis { opacity: 1; transform: translateY(0); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero-right { display: none; }
+  .about { grid-template-columns: 1fr; padding: 70px 32px; gap: 40px; }
+  .about-illus { order: -1; }
+}
+@media (max-width: 768px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .hero-left { padding: 70px 28px 140px; }
+  .work { padding: 70px 24px; }
+  .wgrid { grid-template-columns: 1fr; }
+  .wc { grid-column: span 1 !important; }
+  .skills { padding: 70px 24px; }
+  .contact { padding: 70px 28px 48px; }
+  .contact-inner { grid-template-columns: 1fr; }
+}
+</style>
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav>
-    <a class="nav-logo" href="#">Brad Lengel</a>
-    <ul class="nav-links">
-      <li><a href="#work">Work</a></li>
-      <li><a href="https://sites.google.com/view/brad-lengel/capital-one-1" target="_blank">Capital One (1)</a></li>
-      <li><a href="https://sites.google.com/view/brad-lengel/capital-one-2" target="_blank">Capital One (2)</a></li>
-      <li><a href="https://sites.google.com/view/brad-lengel/digital-realty" target="_blank">Digital Realty</a></li>
-      <li><a href="https://sites.google.com/view/brad-lengel/texas-instruments-1" target="_blank">TI (1)</a></li>
-      <li><a href="https://sites.google.com/view/brad-lengel/texas-instruments-2" target="_blank">TI (2)</a></li>
-      <li><a href="https://sites.google.com/view/brad-lengel/barbri-1" target="_blank">BARBRI (1)</a></li>
-      <li><a href="https://sites.google.com/view/brad-lengel/barbri-2" target="_blank">BARBRI (2)</a></li>
-      <li><a href="https://sites.google.com/view/brad-lengel/strategic-leadership" target="_blank">Leadership</a></li>
-      <li><a href="https://sites.google.com/view/brad-lengel/peer-recognition" target="_blank">Recognition</a></li>
-    </ul>
-  </nav>
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">Brad Lengel</a>
+  <ul class="nav-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="https://sites.google.com/view/brad-lengel/capital-one-1" target="_blank" rel="noopener">Capital One 1</a></li>
+    <li><a href="https://sites.google.com/view/brad-lengel/capital-one-2" target="_blank" rel="noopener">Capital One 2</a></li>
+    <li><a href="https://sites.google.com/view/brad-lengel/digital-realty" target="_blank" rel="noopener">Digital Realty</a></li>
+    <li><a href="https://sites.google.com/view/brad-lengel/texas-instruments-1" target="_blank" rel="noopener">TI 1</a></li>
+    <li><a href="https://sites.google.com/view/brad-lengel/texas-instruments-2" target="_blank" rel="noopener">TI 2</a></li>
+    <li><a href="https://sites.google.com/view/brad-lengel/barbri-1" target="_blank" rel="noopener">BARBRI 1</a></li>
+    <li><a href="https://sites.google.com/view/brad-lengel/barbri-2" target="_blank" rel="noopener">BARBRI 2</a></li>
+    <li><a href="https://sites.google.com/view/brad-lengel/strategic-leadership" target="_blank" rel="noopener">Leadership</a></li>
+    <li><a href="https://sites.google.com/view/brad-lengel/peer-recognition" target="_blank" rel="noopener">Recognition</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
 
-  <!-- HERO -->
-  <header class="hero">
-    <div class="hero-text">
-      <p class="hero-eyebrow">Portfolio &nbsp;·&nbsp; Content Strategy, Marketing, Branding & Advertising</p>
-      <h1 class="hero-name">Brad<br><em>Lengel</em></h1>
-      <p class="hero-contact">
-        <a href="mailto:blengel44@gmail.com">blengel44@gmail.com</a>&ensp;·&ensp;Allen, Texas (Dallas metroplex)
-      </p>
-      <div class="hero-tags">
-        <span class="tag">📖 Storyteller &amp; Visionary</span>
-        <span class="tag">💻 AI &amp; Martech</span>
-        <span class="tag">🤝 Human-Centered</span>
-        <span class="tag">⚡ UX/CX Innovator</span>
-        <span class="tag">📊 Results-Driven</span>
-        <span class="tag">❣️ Brand Steward</span>
-        <span class="tag">🫶 Teamwork Champion</span>
-      </div>
-      <div class="hero-roles">
-        <p class="roles-label">Strategic & Hands-on Experience</p>
-        <div class="roles-list">
-          <span>Content Strategist</span>
-          <span>UX Strategist</span>
-          <span>Content Marketing Manager</span>
-          <span>Marketing Communications Manager</span>
-          <span>Marketing Manager</span>
-          <span>Brand Strategist</span>
-          <span>Supervisor or Creative Services</span>
-          <span>Senior Copywriter</span>
-        </div>
-      </div>
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-left">
+
+    <div class="hero-kicker">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+      Content Strategist &nbsp;·&nbsp; Allen, Texas
     </div>
 
-    <div class="hero-visual">
-      <div class="hero-card">
-        <p class="hero-card-title">Work Worth Knowing</p>
-        <p class="hero-card-sub">High-Impact, High-Value</p>
-        <div class="hero-card-divider"></div>
-        <div class="hero-card-stat">
-          <span class="stat-value">Capital One · Texas Instruments · BARBRI · Digital Realty · AMX · Anritsu</span>
-          </div>
-        <div class="hero-card-stat"> </div>
-        <div class="hero-card-badge">
-          <span class="stat-value">Content Strategy · Brand Governance · Thought Leadership & Storytelling · Content Lifecycle Planning · Omnichannel Marketing · Copywriting · Customer Journey Mapping · Stakeholder Alignment · GTM Execution · Demand Generation Campaigns · SEO · Analytics · UX Design · AI-Assisted Workflows · Research</span>
-        </div>
-        <div class="hero-card-stat">
-        </div>
-        <div class="hero-card-badge">
-          I build strategic B2B and B2C content infrastructure that drives high-value outcomes. I excel at finding solutions for complex problems and identifying high-impact opportunities. I’m effective at cross-functional collaboration and stakeholder alignment. I've executed global content strategies, managed multi-million-dollar campaigns and architected marketing functions from the ground up.
-        </div>
-      </div>
-    </div>
-  </header>
+    <h1 class="hero-name">Brad<br><em>Lengel.</em></h1>
+    <p class="hero-tagline">Where story meets strategy &mdash; and brands come alive.</p>
 
-  <!-- WORK -->
-  <section class="work" id="work">
-    <p class="section-eyebrow reveal">Selected Work</p>
-    <h2 class="section-title reveal">Campaigns, Content &amp;<br>Strategic Initiatives</h2>
-    <p class="section-desc reveal">
-      A curated look at brand-building, campaign strategy, UX writing, and content leadership across Fortune 500 companies and beyond.
+    <p class="hero-meta">
+      <a href="mailto:blengel44@gmail.com">blengel44@gmail.com</a>
+      &ensp;&middot;&ensp; Allen, Texas
     </p>
 
-    <div class="work-grid">
-
-      <a class="work-card reveal" href="https://sites.google.com/view/brad-lengel/capital-one-1" target="_blank">
-        <img class="work-card-img"
-          src="https://lh3.googleusercontent.com/sitesv/APaQ0SS5D5ciPFnf0iQWd3y9QYrsL8Y4ZiRYZKwABWyzkCM5DHVa9SgdWqVHCwKnA48ZiYWDAQVh5VSI2sOKMP3lnKZh5dUZJuSv9KWvYVqchh1AonPs83pCrhbfEZYAZ3SGJjZGE4KqquT1zoObLQsBI-8UWW-pi8p5CAEE_UhcSLxHbHppBVNKJzWStIvL8ln_O3ZtETcLbLtOxXkPP_yN-D4P1GZzVscF2Dy4=w1280"
-          alt="Capital One Auto Finance — Refinance Home Page"
-          loading="lazy" />
-        <div class="work-card-body">
-          <p class="work-card-company">Capital One Auto</p>
-          <h3 class="work-card-title">Refinance Home Page</h3>
-          <p class="work-card-desc">Information architecture &amp; design revamp for the auto refinance experience.</p>
-          <span class="work-card-arrow">View project &rarr;</span>
-        </div>
-      </a>
-
-      <a class="work-card reveal" href="https://sites.google.com/view/brad-lengel/capital-one-2" target="_blank">
-        <img class="work-card-img"
-          src="https://lh3.googleusercontent.com/sitesv/APaQ0SRR4T626yP_lfwrixsft_k3GjfYavBgrA8u2K734_7K8nDaP69B8vUEPlzg-QDuow5WTwdczcFnb4YEobWQYikwI7XqSEHRjj8-RN2WD_puC3eh8w5Wt5yzfsRaeFbDb9Nmu1YwgI0XrkzABTkKZZjgcRampU3llDhAemCYKf2Dkqi3LWswqp40PMqaULHjBe8se5gzNn0zq0ufyzZ166zILyM2r3Rl2By0JvQ=w1280"
-          alt="Capital One Auto — Distinguished Work"
-          loading="lazy" />
-        <div class="work-card-body">
-          <p class="work-card-company">Capital One Auto</p>
-          <h3 class="work-card-title">Distinguished Work</h3>
-          <p class="work-card-desc">Partnering on high-impact, ROI-driven initiatives that moved the needle for the brand.</p>
-          <span class="work-card-arrow">View project &rarr;</span>
-        </div>
-      </a>
-
-      <a class="work-card reveal" href="https://sites.google.com/view/brad-lengel/digital-realty" target="_blank">
-        <img class="work-card-img"
-          src="https://lh3.googleusercontent.com/sitesv/APaQ0SQYAh8r7vwdJltYJAnJl3fkCJUkNPmBUl5yio-JMhWfb1dLdrt4JshFkqffjBSyVxQhuUJ66BsIcI-MzOYq8nEmK_If37f4wOWr-CCjjwBc1zZCGpgBANh-tI7Fjaw4eYQc-NxZHcXGZypnx5GvbcK5OmTFodbOJmC6OMTsDEmgH3m8QVyI_d22zGQEDHhHAC8O-N1QhbF8F1JQSxLvGuu4Ox9iZBdJgAQY9o4=w1280"
-          alt="Digital Realty — Data Gravity Newsletter Microsite"
-          loading="lazy" />
-        <div class="work-card-body">
-          <p class="work-card-company">Digital Realty</p>
-          <h3 class="work-card-title">Data Gravity Newsletter Microsite</h3>
-          <p class="work-card-desc">GTM campaign strategy powering a thought-leadership microsite for the data center leader.</p>
-          <span class="work-card-arrow">View project &rarr;</span>
-        </div>
-      </a>
-
-      <a class="work-card reveal" href="https://sites.google.com/view/brad-lengel/texas-instruments-1" target="_blank">
-        <img class="work-card-img"
-          src="https://lh3.googleusercontent.com/sitesv/APaQ0SQLygV6WQFQtBp6Isp_HsTElXY1bKzrMvrOB375v8vcxRx56d-BuyChsbABvBJGL8WedR0qfVeXBHukKgh0b5Bo3HzcPpd9mWzGf5cw_6cmOLo0ek3a3hZYOUpc4l-Ks3nrYIBX78kyIRbuJfKmCOWLsX6akS2L1IKnFPF1ChxQYgv6UO35aOTNDuFxB7sd8KMQhA40mq8uSNAa28I7OypfscjG3d3ggxyI=w1280"
-          alt="Texas Instruments — TI-Nspire Product Launch Microsite"
-          loading="lazy" />
-        <div class="work-card-body">
-          <p class="work-card-company">Texas Instruments</p>
-          <h3 class="work-card-title">New TI-Nspire™ Technology</h3>
-          <p class="work-card-desc">Product launch microsite introducing the new TI-Nspire™ technology line to educators and students.</p>
-          <span class="work-card-arrow">View project &rarr;</span>
-        </div>
-      </a>
-
-      <a class="work-card reveal" href="https://sites.google.com/view/brad-lengel/texas-instruments-2" target="_blank">
-        <img class="work-card-img"
-          src="https://lh3.googleusercontent.com/sitesv/APaQ0SS3xeHDSiaFhGpjfj1fE89VnSS28Yu4nHBOOuaUjh18VxoJDdbruhT7Sg5Aw36OaiAA_Rd6_Ro4rlBicTwdTyiLXCjS9VEIM9gNRM5eayAZS7mxZGzUSIQkR2G82Vp4G1FgBYmWj-h3IQQxFkDjz9gDAopA7pNMJl94fQgx8VCmA_2cL55v4tDyW9A9L37oHk48orogujhXpGvRMIAOg5qHdonGDHntT=w1280"
-          alt="Texas Instruments — Competitive Positioning"
-          loading="lazy" />
-        <div class="work-card-body">
-          <p class="work-card-company">Texas Instruments</p>
-          <h3 class="work-card-title">Competitive Positioning &amp; Communications</h3>
-          <p class="work-card-desc">Strategic messaging and communications framework for the TI-Nspire™ product family.</p>
-          <span class="work-card-arrow">View project &rarr;</span>
-        </div>
-      </a>
-
-      <a class="work-card reveal" href="https://sites.google.com/view/brad-lengel/barbri-1" target="_blank">
-        <img class="work-card-img"
-          src="https://lh3.googleusercontent.com/sitesv/APaQ0SQOjX1lFcuuMu0f1MlqMDQIdkyxn0-hrM7ioaK0n778Ngx2pgV2zftUPA-CEvj5_2xGvtkvM4p6LxGssTSGHHuil_n8zsv0rQRGoHwb1qUe9rehqvKvDA5S-s9hv-o4kDPZBEH6y1qlL-_HezgO4GfXMovx8x4Wyisw_3M-kyJO-VIwPeSyaBU1=w1280"
-          alt="BARBRI — Integrated Communications Campaign"
-          loading="lazy" />
-        <div class="work-card-body">
-          <p class="work-card-company">BARBRI</p>
-          <h3 class="work-card-title">Integrated Communications Campaign</h3>
-          <p class="work-card-desc">Campaign strategy, content execution, and analytics driving enrollment for the legal education leader.</p>
-          <span class="work-card-arrow">View project &rarr;</span>
-        </div>
-      </a>
-
-      <a class="work-card reveal" href="https://sites.google.com/view/brad-lengel/barbri-2" target="_blank">
-        <img class="work-card-img"
-          src="https://lh3.googleusercontent.com/sitesv/APaQ0SSkIYRE1yG4KQoRs05vvHwwFvSunNGgatvZsZXZUixUj18VxoJDdbruhT7Sg5Aw36OaiAA_Rd6_Ro4rlBicTwdTyiLXCjS9VEIM9gNRM5eayAZS7mxZGzUSIQkR2G82Vp4G1FgBYmWj-h3IQQxFkDjz9gDAopA7pNMJl94fQgx8VCmA_2cL55v4tDyW9A9L37oHk48orogujhXpGvRMIAOg5qHdonGDHntT=w1280"
-          alt="BARBRI — YouTube Channel Content Development"
-          loading="lazy" />
-        <div class="work-card-body">
-          <p class="work-card-company">BARBRI</p>
-          <h3 class="work-card-title">YouTube Channel</h3>
-          <p class="work-card-desc">Content development and SEO optimization for BARBRI's YouTube channel, building organic reach.</p>
-          <span class="work-card-arrow">View project &rarr;</span>
-        </div>
-      </a>
-
-      <a class="work-card reveal" href="https://sites.google.com/view/brad-lengel/strategic-leadership" target="_blank">
-        <img class="work-card-img"
-          src="https://lh3.googleusercontent.com/sitesv/APaQ0SR9iGDWfeGT9wURSmHRDao6X37iOBQYjjKVdSWSOtMumYmqz9XOFy9EfBmQZcBg8HeqBGAmynArVqnp49Sx335KQUGgSwpwgDDjsGftrY8Gp6HYoTNtyZq8J3u87Nyl-jjceL0oHwTT-75jJH0fMvswvY0T_Myiw0VwZ1o8tniIhzA5rfBo4HZlF1EsG9d-TcTKvmxRGGiaM-Of63XO547eHJ7fC2a7Tm=w1280"
-          alt="Strategic Leadership — Operations and Intelligence"
-          loading="lazy" />
-        <div class="work-card-body">
-          <p class="work-card-company">Strategic Leadership</p>
-          <h3 class="work-card-title">Operations &amp; Intelligence</h3>
-          <p class="work-card-desc">Process improvement, research, AI integration, and actionable recommendations for modern marketing teams.</p>
-          <span class="work-card-arrow">View project &rarr;</span>
-        </div>
-      </a>
-
-      <a class="work-card reveal" href="https://sites.google.com/view/brad-lengel/peer-recognition" target="_blank">
-        <div class="work-card-body" style="justify-content:center; padding: 48px 28px;">
-          <div style="font-size:2.5rem; margin-bottom:16px;">🏅</div>
-          <p class="work-card-company">Peer Recognition</p>
-          <h3 class="work-card-title">Peer &amp; Colleague Recognition</h3>
-          <p class="work-card-desc">Testimonials and recognition from teammates and leaders on collaboration, creativity, and impact.</p>
-          <span class="work-card-arrow">View recognition &rarr;</span>
-        </div>
-      </a>
-
+    <div class="pills">
+      <span class="pill">📖 Storyteller &amp; Visionary</span>
+      <span class="pill">💻 AI &amp; Martech</span>
+      <span class="pill">🤝 Human-Centered</span>
+      <span class="pill">⚡ UX/CX Innovator</span>
+      <span class="pill">📊 Results-Driven</span>
+      <span class="pill">❣️ Brand Steward</span>
+      <span class="pill">🫶 Teamwork Champion</span>
     </div>
-  </section>
 
-  <!-- ABOUT -->
-  <section class="about" id="about">
+    <a class="hero-cta" href="#work">
+      See My Work
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+    </a>
+  </div>
+
+  <!-- Illustrative SVG — creative at work -->
+  <div class="hero-right" aria-hidden="true">
+    <svg viewBox="0 0 360 440" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:350px">
+      <!-- desk surface -->
+      <rect x="30" y="295" width="300" height="10" rx="5" fill="rgba(255,255,255,.22)"/>
+      <rect x="50" y="303" width="10" height="75" rx="5" fill="rgba(255,255,255,.13)"/>
+      <rect x="300" y="303" width="10" height="75" rx="5" fill="rgba(255,255,255,.13)"/>
+
+      <!-- laptop body -->
+      <rect x="100" y="248" width="160" height="50" rx="7" fill="rgba(255,255,255,.17)"/>
+      <rect x="88"  y="294" width="184" height="6" rx="3" fill="rgba(255,255,255,.2)"/>
+      <!-- screen -->
+      <rect x="108" y="255" width="144" height="36" rx="4" fill="rgba(217,168,78,.22)"/>
+      <!-- content lines on screen -->
+      <line x1="116" y1="265" x2="232" y2="265" stroke="rgba(255,255,255,.45)" stroke-width="2" stroke-linecap="round"/>
+      <line x1="116" y1="275" x2="215" y2="275" stroke="rgba(255,255,255,.32)" stroke-width="2" stroke-linecap="round"/>
+      <line x1="116" y1="283" x2="224" y2="283" stroke="rgba(255,255,255,.22)" stroke-width="2" stroke-linecap="round"/>
+      <!-- blinking cursor -->
+      <rect x="226" y="261" width="2" height="12" rx="1" fill="rgba(217,168,78,.9)"/>
+
+      <!-- coffee mug -->
+      <rect x="278" y="265" width="30" height="32" rx="5" fill="rgba(193,122,69,.55)"/>
+      <path d="M308 273 Q320 273 320 281 Q320 289 308 289" fill="none" stroke="rgba(193,122,69,.55)" stroke-width="4" stroke-linecap="round"/>
+      <!-- steam wisps -->
+      <path d="M285 263 Q288 254 285 246" fill="none" stroke="rgba(255,255,255,.28)" stroke-width="2" stroke-linecap="round"/>
+      <path d="M293 263 Q296 252 293 243" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="2" stroke-linecap="round"/>
+
+      <!-- notebook -->
+      <rect x="34" y="264" width="52" height="34" rx="4" fill="rgba(255,255,255,.18)" stroke="rgba(255,255,255,.28)" stroke-width="1"/>
+      <line x1="40" y1="274" x2="80" y2="274" stroke="rgba(255,255,255,.38)" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="40" y1="281" x2="76" y2="281" stroke="rgba(255,255,255,.28)" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="40" y1="288" x2="74" y2="288" stroke="rgba(255,255,255,.2)" stroke-width="1.5" stroke-linecap="round"/>
+      <!-- pen on notebook -->
+      <rect x="84" y="266" width="5" height="30" rx="2.5" fill="rgba(217,168,78,.7)" transform="rotate(12, 86, 281)"/>
+
+      <!-- figure torso -->
+      <ellipse cx="180" cy="218" rx="44" ry="54" fill="rgba(107,79,90,.72)"/>
+      <!-- arms -->
+      <path d="M136 222 Q116 244 108 264" fill="none" stroke="rgba(107,79,90,.72)" stroke-width="20" stroke-linecap="round"/>
+      <path d="M224 222 Q246 244 252 264" fill="none" stroke="rgba(107,79,90,.72)" stroke-width="20" stroke-linecap="round"/>
+      <!-- collar detail -->
+      <path d="M164 180 Q180 196 196 180" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="3" stroke-linecap="round"/>
+
+      <!-- head -->
+      <circle cx="180" cy="150" r="48" fill="rgba(217,168,78,.88)"/>
+      <!-- hair -->
+      <path d="M132 146 Q138 100 180 104 Q222 100 228 146" fill="rgba(78,123,120,.9)"/>
+      <!-- eyes -->
+      <circle cx="166" cy="146" r="4.5" fill="rgba(28,28,30,.65)"/>
+      <circle cx="194" cy="146" r="4.5" fill="rgba(28,28,30,.65)"/>
+      <!-- eye shine -->
+      <circle cx="168" cy="144" r="1.5" fill="rgba(255,255,255,.6)"/>
+      <circle cx="196" cy="144" r="1.5" fill="rgba(255,255,255,.6)"/>
+      <!-- smile -->
+      <path d="M170 162 Q180 172 190 162" fill="none" stroke="rgba(28,28,30,.55)" stroke-width="2.5" stroke-linecap="round"/>
+
+      <!-- speech / thought bubble -->
+      <path d="M214 68 Q300 68 300 108 Q300 144 214 144 L204 162 L202 144 Q130 144 130 108 Q130 68 214 68Z"
+            fill="rgba(255,255,255,.2)" stroke="rgba(255,255,255,.32)" stroke-width="1.5"/>
+      <line x1="150" y1="96" x2="282" y2="96" stroke="rgba(255,255,255,.52)" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="150" y1="110" x2="266" y2="110" stroke="rgba(255,255,255,.4)" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="150" y1="124" x2="274" y2="124" stroke="rgba(255,255,255,.3)" stroke-width="2.5" stroke-linecap="round"/>
+
+      <!-- light bulb -->
+      <circle cx="60" cy="86" r="26" fill="rgba(217,168,78,.52)" stroke="rgba(255,255,255,.28)" stroke-width="1.5"/>
+      <path d="M52 94 Q49 82 60 74 Q71 66 73 75 Q75 84 68 94Z" fill="rgba(255,255,255,.38)"/>
+      <line x1="55" y1="100" x2="65" y2="100" stroke="rgba(255,255,255,.6)" stroke-width="2" stroke-linecap="round"/>
+      <line x1="56" y1="105" x2="64" y2="105" stroke="rgba(255,255,255,.4)" stroke-width="2" stroke-linecap="round"/>
+      <!-- rays -->
+      <line x1="60" y1="52" x2="60" y2="44" stroke="rgba(217,168,78,.55)" stroke-width="2" stroke-linecap="round"/>
+      <line x1="82" y1="62" x2="88" y2="56" stroke="rgba(217,168,78,.55)" stroke-width="2" stroke-linecap="round"/>
+      <line x1="38" y1="62" x2="32" y2="56" stroke="rgba(217,168,78,.55)" stroke-width="2" stroke-linecap="round"/>
+      <line x1="92" y1="86" x2="100" y2="86" stroke="rgba(217,168,78,.55)" stroke-width="2" stroke-linecap="round"/>
+      <line x1="28" y1="86" x2="20" y2="86" stroke="rgba(217,168,78,.55)" stroke-width="2" stroke-linecap="round"/>
+
+      <!-- star accents -->
+      <text x="308" y="72" font-size="18" fill="rgba(255,255,255,.38)">✦</text>
+      <text x="42" y="196" font-size="11" fill="rgba(255,255,255,.28)">✦</text>
+      <text x="322" y="218" font-size="10" fill="rgba(217,168,78,.5)">✦</text>
+      <text x="150" y="30"  font-size="14" fill="rgba(255,255,255,.22)">✦</text>
+    </svg>
+  </div>
+
+  <!-- wave divider -->
+  <div class="hero-wave">
+    <svg viewBox="0 0 1440 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,60 C360,100 1080,20 1440,60 L1440,90 L0,90 Z" fill="#F5F1EC"/>
+    </svg>
+  </div>
+</header>
+
+<!-- ROLES RIBBON -->
+<div class="ribbon" aria-label="Open to roles including">
+  <div class="ribbon-track">
+    <span class="ribbon-item"><span class="rdot"></span>Content Strategist</span>
+    <span class="ribbon-item"><span class="rdot"></span>Content Marketing Manager</span>
+    <span class="ribbon-item"><span class="rdot"></span>Marketing Communications Manager</span>
+    <span class="ribbon-item"><span class="rdot"></span>Supervisor, Creative Services</span>
+    <span class="ribbon-item"><span class="rdot"></span>Brand Strategist</span>
+    <span class="ribbon-item"><span class="rdot"></span>Senior Copywriter</span>
+    <span class="ribbon-item"><span class="rdot"></span>Content Strategist</span>
+    <span class="ribbon-item"><span class="rdot"></span>Content Marketing Manager</span>
+    <span class="ribbon-item"><span class="rdot"></span>Marketing Communications Manager</span>
+    <span class="ribbon-item"><span class="rdot"></span>Supervisor, Creative Services</span>
+    <span class="ribbon-item"><span class="rdot"></span>Brand Strategist</span>
+    <span class="ribbon-item"><span class="rdot"></span>Senior Copywriter</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-illus sr">
+    <!-- Story × Strategy constellation map -->
+    <svg viewBox="0 0 440 460" xmlns="http://www.w3.org/2000/svg">
+      <!-- soft bg shape -->
+      <ellipse cx="220" cy="240" rx="195" ry="205" fill="rgba(125,165,160,.09)"/>
+
+      <!-- connection lines (dashed) -->
+      <line x1="220" y1="105" x2="100" y2="205" stroke="var(--nomadic)" stroke-width="1.8" stroke-dasharray="6 5" opacity=".55"/>
+      <line x1="220" y1="105" x2="340" y2="205" stroke="var(--nomadic)" stroke-width="1.8" stroke-dasharray="6 5" opacity=".55"/>
+      <line x1="100"  y1="205" x2="160" y2="335" stroke="var(--nomadic)" stroke-width="1.5" stroke-dasharray="5 6" opacity=".45"/>
+      <line x1="340"  y1="205" x2="280" y2="335" stroke="var(--nomadic)" stroke-width="1.5" stroke-dasharray="5 6" opacity=".45"/>
+      <line x1="160"  y1="335" x2="280" y2="335" stroke="var(--nomadic)" stroke-width="1.5" stroke-dasharray="5 6" opacity=".42"/>
+      <line x1="220"  y1="105" x2="220" y2="335" stroke="var(--nomadic)" stroke-width="1.2" stroke-dasharray="4 7" opacity=".28"/>
+
+      <!-- center node: Story × Strategy -->
+      <circle cx="220" cy="105" r="54" fill="var(--quietude)" opacity=".92"/>
+      <text x="220" y="97"  text-anchor="middle" font-family="DM Serif Display,serif" font-size="13" fill="white" font-style="italic">Story</text>
+      <text x="220" y="113" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="rgba(255,255,255,.75)" font-weight="700" letter-spacing="1px">×</text>
+      <text x="220" y="128" text-anchor="middle" font-family="DM Serif Display,serif" font-size="12" fill="rgba(255,255,255,.9)" font-style="italic">Strategy</text>
+
+      <!-- node: Brand -->
+      <circle cx="100" cy="205" r="40" fill="var(--spiced-cider)" opacity=".88"/>
+      <text x="100" y="201" text-anchor="middle" font-family="DM Serif Display,serif" font-size="12" fill="white" font-style="italic">Brand</text>
+      <text x="100" y="216" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="rgba(255,255,255,.8)">Steward</text>
+
+      <!-- node: UX/CX -->
+      <circle cx="340" cy="205" r="40" fill="var(--delft)" opacity=".88"/>
+      <text x="340" y="201" text-anchor="middle" font-family="DM Serif Display,serif" font-size="12" fill="white" font-style="italic">UX / CX</text>
+      <text x="340" y="216" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="rgba(255,255,255,.8)">Innovator</text>
+
+      <!-- node: AI & Martech -->
+      <circle cx="160" cy="335" r="36" fill="var(--nutshell)" opacity=".88"/>
+      <text x="160" y="330" text-anchor="middle" font-family="DM Serif Display,serif" font-size="12" fill="white" font-style="italic">AI &amp;</text>
+      <text x="160" y="347" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="rgba(255,255,255,.8)">Martech</text>
+
+      <!-- node: Results -->
+      <circle cx="280" cy="335" r="36" fill="var(--convivial)" opacity=".9"/>
+      <text x="280" y="330" text-anchor="middle" font-family="DM Serif Display,serif" font-size="12" fill="var(--ink)" font-style="italic">Results</text>
+      <text x="280" y="347" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9.5" fill="rgba(28,28,30,.75)">Driven</text>
+
+      <!-- sparkle decorations -->
+      <text x="42"  y="140" font-size="16" fill="var(--convivial)" opacity=".48">✦</text>
+      <text x="374" y="152" font-size="12" fill="var(--quietude)"  opacity=".48">✦</text>
+      <text x="196" y="408" font-size="14" fill="var(--spiced-cider)" opacity=".38">✦</text>
+      <text x="356" y="378" font-size="10" fill="var(--nutshell)"  opacity=".48">✦</text>
+      <text x="60"  y="290" font-size="9"  fill="var(--delft)"    opacity=".4">✦</text>
+    </svg>
+  </div>
+
+  <div class="about-text">
+    <p class="eyebrow sr">A little about me</p>
+    <h2 class="sr">I turn <em>complex ideas</em> into content people actually want to read.</h2>
+    <p class="sr">
+      Good content doesn't just inform — it moves people. I'm a content strategist, brand writer, and marketing communicator with deep experience helping companies like <strong>Capital One, Digital Realty, Texas Instruments,</strong> and <strong>BARBRI</strong> connect with their audiences in ways that matter.
+    </p>
+    <p class="sr">
+      My work lives at the intersection of <strong>human insight and business clarity</strong> — part editorial instinct, part data-driven discipline, part relentless creative curiosity. I believe the best brand stories are honest, clear, and built to last.
+    </p>
+    <p class="sr">
+      Based in Allen, Texas. Open to new opportunities. Let's make something great together.
+    </p>
+  </div>
+</section>
+
+<!-- WORK -->
+<section class="work" id="work">
+  <div class="sec-head">
+    <p class="eyebrow sr">Selected Work</p>
+    <h2 class="sr">Campaigns, Content &amp; <em>Big Ideas</em></h2>
+  </div>
+
+  <div class="wgrid">
+
+    <!-- 1 Capital One (1) — Featured -->
+    <a class="wc sr" href="https://sites.google.com/view/brad-lengel/capital-one-1" target="_blank" rel="noopener">
+      <span class="wc-badge">Featured</span>
+      <img class="wc-img" loading="lazy" alt="Capital One Auto – Refinance Home Page"
+        src="https://lh3.googleusercontent.com/sitesv/APaQ0SS5D5ciPFnf0iQWd3y9QYrsL8Y4ZiRYZKwABWyzkCM5DHVa9SgdWqVHCwKnA48ZiYWDAQVh5VSI2sOKMP3lnKZh5dUZJuSv9KWvYVqchh1AonPs83pCrhbfEZYAZ3SGJjZGE4KqquT1zoObLQsBI-8UWW-pi8p5CAEE_UhcSLxHbHppBVNKJzWStIvL8ln_O3ZtETcLbLtOxXkPP_yN-D4P1GZzVscF2Dy4=w1280"/>
+      <div class="wc-body">
+        <p class="wc-co">Capital One Auto &nbsp;·&nbsp; (1)</p>
+        <h3 class="wc-title">Refinance Home Page — Information Architecture &amp; Design Revamp</h3>
+        <p class="wc-desc">Led the content strategy and IA overhaul of the auto refinance landing experience, turning a complex financial journey into a clear, conversion-driven path.</p>
+        <span class="wc-arrow">View Project →</span>
+      </div>
+    </a>
+
+    <!-- 2 Capital One (2) -->
+    <a class="wc sr" href="https://sites.google.com/view/brad-lengel/capital-one-2" target="_blank" rel="noopener">
+      <img class="wc-img" loading="lazy" alt="Capital One Auto – Distinguished Work"
+        src="https://lh3.googleusercontent.com/sitesv/APaQ0SRR4T626yP_lfwrixsft_k3GjfYavBgrA8u2K734_7K8nDaP69B8vUEPlzg-QDuow5WTwdczcFnb4YEobWQYikwI7XqSEHRjj8-RN2WD_puC3eh8w5Wt5yzfsRaeFbDb9Nmu1YwgI0XrkzABTkKZZjgcRampU3llDhAemCYKf2Dkqi3LWswqp40PMqaULHjBe8se5gzNn0zq0ufyzZ166zILyM2r3Rl2By0JvQ=w1280"/>
+      <div class="wc-body">
+        <p class="wc-co">Capital One Auto &nbsp;·&nbsp; (2)</p>
+        <h3 class="wc-title">Distinguished Work — High-Impact ROI Initiatives</h3>
+        <p class="wc-desc">Partnering on marquee, ROI-driven initiatives that raised the bar for brand and content excellence.</p>
+        <span class="wc-arrow">View Project →</span>
+      </div>
+    </a>
+
+    <!-- 3 Digital Realty -->
+    <a class="wc sr" href="https://sites.google.com/view/brad-lengel/digital-realty" target="_blank" rel="noopener">
+      <img class="wc-img" loading="lazy" alt="Digital Realty – Data Gravity Newsletter Microsite"
+        src="https://lh3.googleusercontent.com/sitesv/APaQ0SQYAh8r7vwdJltYJAnJl3fkCJUkNPmBUl5yio-JMhWfb1dLdrt4JshFkqffjBSyVxQhuUJ66BsIcI-MzOYq8nEmK_If37f4wOWr-CCjjwBc1zZCGpgBANh-tI7Fjaw4eYQc-NxZHcXGZypnx5GvbcK5OmTFodbOJmC6OMTsDEmgH3m8QVyI_d22zGQEDHhHAC8O-N1QhbF8F1JQSxLvGuu4Ox9iZBdJgAQY9o4=w1280"/>
+      <div class="wc-body">
+        <p class="wc-co">Digital Realty</p>
+        <h3 class="wc-title">Data Gravity Newsletter — GTM Campaign Strategy &amp; Microsite</h3>
+        <p class="wc-desc">Full go-to-market strategy and content architecture for a thought leadership microsite targeting data center decision-makers globally.</p>
+        <span class="wc-arrow">View Project →</span>
+      </div>
+    </a>
+
+    <!-- 4 TI (1) -->
+    <a class="wc sr" href="https://sites.google.com/view/brad-lengel/texas-instruments-1" target="_blank" rel="noopener">
+      <img class="wc-img" loading="lazy" alt="Texas Instruments – TI-Nspire Product Launch"
+        src="https://lh3.googleusercontent.com/sitesv/APaQ0SQLygV6WQFQtBp6Isp_HsTElXY1bKzrMvrOB375v8vcxRx56d-BuyChsbABvBJGL8WedR0qfVeXBHukKgh0b5Bo3HzcPpd9mWzGf5cw_6cmOLo0ek3a3hZYOUpc4l-Ks3nrYIBX78kyIRbuJfKmCOWLsX6akS2L1IKnFPF1ChxQYgv6UO35aOTNDuFxB7sd8KMQhA40mq8uSNAa28I7OypfscjG3d3ggxyI=w1280"/>
+      <div class="wc-body">
+        <p class="wc-co">Texas Instruments &nbsp;·&nbsp; (1)</p>
+        <h3 class="wc-title">New TI-Nspire™ Technology — Product Launch Microsite</h3>
+        <p class="wc-desc">Copywriting and content strategy for the launch microsite introducing TI-Nspire™ to educators, students, and parents nationwide.</p>
+        <span class="wc-arrow">View Project →</span>
+      </div>
+    </a>
+
+    <!-- 5 TI (2) -->
+    <a class="wc sr" href="https://sites.google.com/view/brad-lengel/texas-instruments-2" target="_blank" rel="noopener">
+      <img class="wc-img" loading="lazy" alt="Texas Instruments – Competitive Positioning"
+        src="https://lh3.googleusercontent.com/sitesv/APaQ0SS3xeHDSiaFhGpjfj1fE89VnSS28Yu4nHBOOuoFZRaXyaUjho1QDlKCOyIJQtg-4zk5G3jGsQqbwqLnLnq6fq6kWb7l79r56rM9UV0Y7c9f2WIA0Elsp7pVPJ0d-IejGQ3DJvhD_zb5lku1Hp72A6bscmoXBeh8jRoghH5MUQViba7ZHFNoiJP1pc23Bqnt2RiHj1KfkrkFSLFvIH4Hkc8c75mSmtXJQCsp5AU=w1280"/>
+      <div class="wc-body">
+        <p class="wc-co">Texas Instruments &nbsp;·&nbsp; (2)</p>
+        <h3 class="wc-title">TI-Nspire™ — Competitive Positioning &amp; Communications</h3>
+        <p class="wc-desc">Strategic messaging framework sharpening TI's competitive edge in the ed-tech category.</p>
+        <span class="wc-arrow">View Project →</span>
+      </div>
+    </a>
+
+    <!-- 6 BARBRI (1) -->
+    <a class="wc sr" href="https://sites.google.com/view/brad-lengel/barbri-1" target="_blank" rel="noopener">
+      <img class="wc-img" loading="lazy" alt="BARBRI – Integrated Communications Campaign"
+        src="https://lh3.googleusercontent.com/sitesv/APaQ0SQOjX1lFcuuMu0f1MlqMDQIdkyxn0-hrM7ioaK0n778Ngx2pgV2zftUPA-CEvj5_2xGvtkvM4p6LtFnuCtKHQSk0oFk3pCMs-RqGyt2P7pcPBV9PFb8s69Q3ElssTSGHHuil_n8zsv0rQRGoHwb1qUe9rehqvKvDA5S-s9hv-o4kDPZBEH6y1qlL-_HezgO4GfXMovx8x4Wyisw_3M-kyJO-VIwPeSyaBU1=w1280"/>
+      <div class="wc-body">
+        <p class="wc-co">BARBRI &nbsp;·&nbsp; (1)</p>
+        <h3 class="wc-title">Integrated Communications Campaign — Strategy, Execution &amp; Analytics</h3>
+        <p class="wc-desc">End-to-end campaign strategy, content execution, and analytics for the nation's leading bar exam prep provider, driving measurable enrollment lift.</p>
+        <span class="wc-arrow">View Project →</span>
+      </div>
+    </a>
+
+    <!-- 7 BARBRI (2) -->
+    <a class="wc sr" href="https://sites.google.com/view/brad-lengel/barbri-2" target="_blank" rel="noopener">
+      <img class="wc-img" loading="lazy" alt="BARBRI – YouTube Channel"
+        src="https://lh3.googleusercontent.com/sitesv/APaQ0SSkIYRE1yG4KQoRs05vvHwwFvSunNGgatvZsZXZUixUj18VxoJDdbruhT7Sg5Aw36OaiAA_Rd6_Ro4rlBicTwdTyiLXCjS9VEIM9gNRM5eayAZS7mxZGzUSIQkR2G82Vp4G1FgBYmWj-h3IQQxFkDjz9gDAopA7pNMJl94fQgx8VCmA_2cL55v4tDyW9A9L37oHk48orogujhXpGvRMIAOg5qHdonGDHntT=w1280"/>
+      <div class="wc-body">
+        <p class="wc-co">BARBRI &nbsp;·&nbsp; (2)</p>
+        <h3 class="wc-title">YouTube Channel — Content Development &amp; SEO Optimization</h3>
+        <p class="wc-desc">Built and optimized BARBRI's YouTube presence — scripting, SEO strategy, publishing cadence, and performance analysis.</p>
+        <span class="wc-arrow">View Project →</span>
+      </div>
+    </a>
+
+    <!-- 8 Strategic Leadership -->
+    <a class="wc sr" href="https://sites.google.com/view/brad-lengel/strategic-leadership" target="_blank" rel="noopener">
+      <img class="wc-img" loading="lazy" alt="Strategic Leadership – Operations and Intelligence"
+        src="https://lh3.googleusercontent.com/sitesv/APaQ0SR9iGDWfeGT9wURSmHRDao6X37iOBQYjjKVdSWSOtMumYmqz9XOFy9EfBmQZcBg8HeqBGAmynArVqnp49Sx335KQUGhGOSwpwgDDjsGftrY8Gp6HYoTNtyZq8J3u87Nyl-jjceL0oHwTT-75jJH0fMvswvY0T_Myiw0VwZ1o8tniIhzA5rfBo4HZlF1EsG9d-TcTKvmxRGGiaM-Of63XO547eHJ7fC2a7Tm=w1280"/>
+      <div class="wc-body">
+        <p class="wc-co">Strategic Leadership</p>
+        <h3 class="wc-title">Operations &amp; Intelligence — Process, Research, AI &amp; Recommendations</h3>
+        <p class="wc-desc">A window into my operational and strategic practice: process design, competitive research, AI-augmented workflows, and cross-functional recommendations.</p>
+        <span class="wc-arrow">View Project →</span>
+      </div>
+    </a>
+
+    <!-- 9 Peer Recognition -->
+    <a class="wc wc-reco sr" href="https://sites.google.com/view/brad-lengel/peer-recognition" target="_blank" rel="noopener">
+      <div class="wc-body">
+        <svg viewBox="0 0 70 50" xmlns="http://www.w3.org/2000/svg" style="width:52px;margin-bottom:16px;opacity:.38">
+          <text x="0" y="50" font-family="DM Serif Display,serif" font-size="74" fill="white">"</text>
+        </svg>
+        <p class="wc-co">Peer Recognition</p>
+        <h3 class="wc-title">What Colleagues &amp; Leaders Say</h3>
+        <p class="wc-desc">Recognition, testimonials, and peer endorsements — the human proof behind the work.</p>
+        <span class="wc-arrow">Read Recognition →</span>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="skills" id="skills">
+  <p class="eyebrow sr" style="text-align:center">What I bring</p>
+  <h2 class="sr">Skills &amp; <em>Superpowers</em></h2>
+  <div class="sgrid">
+    <div class="sc sr">
+      <span class="sc-icon">📖</span>
+      <div class="sc-name">Storytelling</div>
+      <div class="sc-desc">Crafting narratives that resonate, persuade, and endure across every channel.</div>
+    </div>
+    <div class="sc sr">
+      <span class="sc-icon">🗺️</span>
+      <div class="sc-name">Content Strategy</div>
+      <div class="sc-desc">End-to-end content planning, IA, and editorial systems designed to scale.</div>
+    </div>
+    <div class="sc sr">
+      <span class="sc-icon">💻</span>
+      <div class="sc-name">AI &amp; Martech</div>
+      <div class="sc-desc">Harnessing modern tools to amplify creativity and accelerate results.</div>
+    </div>
+    <div class="sc sr">
+      <span class="sc-icon">⚡</span>
+      <div class="sc-name">UX / CX Writing</div>
+      <div class="sc-desc">Clear, human-centered copy that guides users and reduces friction at every touchpoint.</div>
+    </div>
+    <div class="sc sr">
+      <span class="sc-icon">❣️</span>
+      <div class="sc-name">Brand Voice</div>
+      <div class="sc-desc">Building and stewarding distinctive brand voices that people recognize and trust.</div>
+    </div>
+    <div class="sc sr">
+      <span class="sc-icon">📊</span>
+      <div class="sc-name">Analytics &amp; ROI</div>
+      <div class="sc-desc">Tying content output to business outcomes with measurement that actually matters.</div>
+    </div>
+    <div class="sc sr">
+      <span class="sc-icon">🫶</span>
+      <div class="sc-name">Team Leadership</div>
+      <div class="sc-desc">Mentoring creatives, aligning stakeholders, and championing collaborative culture.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT FOOTER -->
+<footer class="contact" id="contact">
+  <svg class="contact-blob" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path fill="var(--quietude)" d="M250,50 C380,50 460,145 460,265 C460,385 370,450 250,450 C130,450 40,380 40,260 C40,140 120,50 250,50Z"/>
+  </svg>
+
+  <div class="contact-inner">
     <div>
-      <p class="section-eyebrow reveal">About Brad</p>
-      <h2 class="section-title reveal">Where Story Meets Strategy</h2>
-      <p class="about-body reveal">
-        I'm a content strategist and marketing communications leader who believes great work lives at the intersection of human insight and business clarity. With deep roots in brand storytelling, UX writing, and AI-powered marketing, I help organizations connect meaningfully with their audiences — and measure what matters.
-      </p>
-      <br/>
-      <p class="about-body reveal">
-        Based in Allen, Texas. Open to new opportunities. Let's talk.
-        <br/><br/>
-        <a href="mailto:blengel44@gmail.com" style="color: var(--gold); font-weight:700; letter-spacing:.05em;">blengel44@gmail.com</a>
-      </p>
+      <p class="eyebrow sr">Let's connect</p>
+      <h2 class="sr">Got a story<br>worth <em>telling?</em></h2>
+      <p class="sr">Whether you need a content strategist to reshape your brand narrative, a senior copywriter to craft campaigns that convert, or a marketing communications leader to unify your voice — I'd love to hear about it.</p>
+      <a class="contact-btn sr" href="mailto:blengel44@gmail.com">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+        blengel44@gmail.com
+      </a>
     </div>
-    <div class="about-traits reveal">
-      <div class="trait">
-        <div class="trait-icon">📖</div>
-        <div class="trait-label">Storyteller &amp; Visionary</div>
-      </div>
-      <div class="trait">
-        <div class="trait-icon">💻</div>
-        <div class="trait-label">AI &amp; Martech Enthusiast</div>
-      </div>
-      <div class="trait">
-        <div class="trait-icon">🤝</div>
-        <div class="trait-label">Human-Centered Communicator</div>
-      </div>
-      <div class="trait">
-        <div class="trait-icon">⚡</div>
-        <div class="trait-label">UX / CX Innovator</div>
-      </div>
-      <div class="trait">
-        <div class="trait-icon">📊</div>
-        <div class="trait-label">Results-Driven &amp; Business-Minded</div>
-      </div>
-      <div class="trait">
-        <div class="trait-icon">❣️</div>
-        <div class="trait-label">Brand Steward</div>
-      </div>
-      <div class="trait">
-        <div class="trait-icon">🫶</div>
-        <div class="trait-label">Teamwork Advocate &amp; Champion</div>
-      </div>
-    </div>
-  </section>
+    <nav class="contact-nav" aria-label="Portfolio pages">
+      <p class="contact-nav-head">Portfolio</p>
+      <a href="https://sites.google.com/view/brad-lengel/capital-one-1" target="_blank" rel="noopener">Capital One Auto (1)</a>
+      <a href="https://sites.google.com/view/brad-lengel/capital-one-2" target="_blank" rel="noopener">Capital One Auto (2)</a>
+      <a href="https://sites.google.com/view/brad-lengel/digital-realty" target="_blank" rel="noopener">Digital Realty</a>
+      <a href="https://sites.google.com/view/brad-lengel/texas-instruments-1" target="_blank" rel="noopener">Texas Instruments (1)</a>
+      <a href="https://sites.google.com/view/brad-lengel/texas-instruments-2" target="_blank" rel="noopener">Texas Instruments (2)</a>
+      <a href="https://sites.google.com/view/brad-lengel/barbri-1" target="_blank" rel="noopener">BARBRI (1)</a>
+      <a href="https://sites.google.com/view/brad-lengel/barbri-2" target="_blank" rel="noopener">BARBRI (2)</a>
+      <a href="https://sites.google.com/view/brad-lengel/strategic-leadership" target="_blank" rel="noopener">Strategic Leadership</a>
+      <a href="https://sites.google.com/view/brad-lengel/peer-recognition" target="_blank" rel="noopener">Peer Recognition</a>
+    </nav>
+  </div>
 
-  <!-- FOOTER -->
-  <footer>
-    <div>
-      <div class="footer-name">Brad Lengel</div>
-      <div class="footer-contact">
-        <a href="mailto:blengel44@gmail.com">blengel44@gmail.com</a> &nbsp;·&nbsp; Allen, Texas
-      </div>
-    </div>
-    <div class="footer-copy">© 2025 Brad Lengel. All rights reserved.</div>
-  </footer>
+  <div class="contact-foot">
+    <div class="contact-foot-name">Brad Lengel &nbsp;·&nbsp; Allen, Texas</div>
+    <div class="contact-foot-copy">© 2025 Brad Lengel. All rights reserved.</div>
+  </div>
+</footer>
 
-  <script>
-    // Scroll reveal
-    const reveals = document.querySelectorAll('.reveal');
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((e, i) => {
-        if (e.isIntersecting) {
-          // stagger siblings in the same grid
-          const delay = Array.from(e.target.parentElement.children).indexOf(e.target) * 80;
-          setTimeout(() => e.target.classList.add('visible'), Math.min(delay, 400));
-          io.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.12 });
-    reveals.forEach(el => io.observe(el));
-  </script>
+<script>
+// Scroll reveal with stagger
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    const siblings = Array.from(entry.target.parentElement.children);
+    const idx = siblings.indexOf(entry.target);
+    setTimeout(() => entry.target.classList.add('vis'), Math.min(idx * 75, 380));
+    io.unobserve(entry.target);
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.sr').forEach(el => io.observe(el));
+</script>
 </body>
 </html>
